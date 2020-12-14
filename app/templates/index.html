@@ -10,7 +10,23 @@
     {%block styles%}
     {{ super() }}
         <style>
-         
+            header{
+                background-image: url('../static/bg1.jpg');
+                background-repeat: no-repeat;
+                background-size: cover;
+                height: 90vh;
+                padding: 20%;
+            }
+            footer{
+                padding: 2px;
+                background-color:gray;
+                color:lightpink;
+                font-family: 'Righteous', 'cursive';
+                border-radius:5px;
+            }
+            .container{
+                position: relative;
+            }
         </style>
     {% endblock %}
 
@@ -18,16 +34,16 @@
     <body>
     {% block content %}
     <header>
-        <h1 class="text-center">Welcome Your Personal Blog</h1>
+        <h1 class="text-center">Welcome To Your Personal Blog</h1>
         <h3 class="text-center">Create and share your opinions with the world</h3>
     </header>
     <div class="container">
         <div class="row">
-            <div class="col-md-7">
+            <div class="col-md-8">
                 <strong><h3 class="text-center"> Recent Posts</h3></strong><br>
                 {{macro.displayBlogs(blogs)}}
             </div>
-            <div class="col-md-5">
+            <div class="col-md-4">
                 <blockquote>
                     {{macro.displayQuotes(quotes)}}
                 </blockquote><br><br>
@@ -36,7 +52,7 @@
             </div>
         </div>
     </div>
-    <footer class='footer'>Copyright 2020 | Personal Blog</footer> 
+    <footer class="text-center" >Copyright 2020 | Personal Blog</footer> 
     {% endblock %}
     </body>
 </html>
