@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container" >
+       <h1 class="text-center"> Sorry, Page could not be found</h1>
+       <span> 
+           <h3>Back to home?</h3>
+           <a href="{{url_for('index.html')}}"><button class="btn btn-dark" style="background-color:gray;">Go Back</button></a>
+       </span>
+</div>
+{% endblock %}

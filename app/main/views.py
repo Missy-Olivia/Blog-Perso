@@ -107,7 +107,7 @@ def new_blog():
        
 
     title = 'New blog'
-    return render_template('new_blog.html', title = title, blogform = blog_form, new_blog=new_blog)
+    return render_template('new.html', title = title, blogform = blog_form, new_blog=new_blog)
 
 @main.route('/blog/<int:id>',methods = ['GET','POST'])
 def blog(id):

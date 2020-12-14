@@ -6,6 +6,19 @@
         <meta charset="utf-8">
         {%block styles%}
         {{ super() }}
+        <style>
+            body{
+                background-color:rgb(235, 209, 213);
+
+                }
+            footer{
+                padding: 2px;
+                background-color:gray;
+                color:lightpink;
+                font-family: 'Righteous', 'cursive';
+                border-radius:5px;
+            }
+        </style>
         {{ simplemde.css}}
         {{ simplemde.js }}
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css?q=1280549780">
@@ -20,5 +33,6 @@
         {% block content %}
         
         {% endblock%}
+        <footer class="text-center" >Copyright 2020 | Personal Blog</footer> 
     </body>
 </html>
