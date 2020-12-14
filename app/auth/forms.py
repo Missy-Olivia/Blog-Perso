@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms.validators import Required,Email,EqualTo
 from wtforms import ValidationError
 from wtforms import StringField, PasswordField,BooleanField,SubmitField
+from ..models import User
 
 class RegForm(FlaskForm):
     email = StringField('Enter Email Address',validators=[Required(),Email()])
@@ -12,11 +13,11 @@ class RegForm(FlaskForm):
 
     def validate_email(self,data_field):
         if User.query.filter_by(email = data_field.data).first():
-            raise ValidationError('There is already an account with that email!')
+            raise ValidationError('Email exists already!')
 
     def validate_username(self,data_field):
         if User.query.filter_by(username = data_field.data).first():
-            raise ValidationError('That Username is taken')
+            raise ValidationError('Username exists already!')
 
 class loginForm(FlaskForm):
     email = StringField('Enter Email Address',validators=[Required(),Email()])
