@@ -5,6 +5,7 @@ from wtforms.validators import Required
 from wtforms.validators import Required,Email,EqualTo
 from wtforms import ValidationError
 from flask_wtf.file import FileField, FileAllowed
+from ..models import Mail_list
 
 class blogForm(FlaskForm):
 
@@ -29,6 +30,6 @@ class subscribeForm(FlaskForm):
     name = StringField('Name',validators = [Required()])
     submit = SubmitField('Sign Up')
 
- def validate_email(self,data_field):
-            if Mail_list.query.filter_by(email = data_field.data).first():
-                raise ValidationError('Email already exists in mail list!')
+    def validate_email(self,data_field):
+        if Mail_list.query.filter_by(email = data_field.data).first():
+            raise ValidationError('Email already exists in mail list!')

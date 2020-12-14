@@ -2,7 +2,7 @@ from . import main
 from flask_login import login_required, current_user
 from flask import render_template,request,redirect,url_for,abort,flash, current_app
 from ..models import User, Comment, Blog, Like, Dislike
-from .forms import CommentForm, BlogForm, UpdateProfile, SubscribeForm, Mail_list
+from .forms import commentForm, blogForm, updateProfile, subscribeForm, Mail_list
 from PIL import Image
 import secrets,os
 from .. import db, photos
