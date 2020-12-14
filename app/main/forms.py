@@ -28,3 +28,7 @@ class subscribeForm(FlaskForm):
     email = StringField('Email Address',validators=[Required(),Email()])
     name = StringField('Name',validators = [Required()])
     submit = SubmitField('Sign Up')
+
+ def validate_email(self,data_field):
+            if Mail_list.query.filter_by(email = data_field.data).first():
+                raise ValidationError('Email already exists in mail list!')
