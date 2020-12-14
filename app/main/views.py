@@ -15,7 +15,7 @@ def save_picture(form_image):
     randome_hex = secrets.token_hex(8)
     f_name, f_ext = os.path.splitext(form_image.filename)
     picture_name = randome_hex + f_ext
-    picture_path = os.path.join(current_app.root_path, 'static/featured_images', picture_name)
+    picture_path = os.path.join(current_app.root_path, 'static/pics', picture_name)
     
     output_size = (1000, 600)
     final_image = Image.open(form_image)
@@ -26,12 +26,12 @@ def save_picture(form_image):
     return picture_name
 @main.route('/',methods = ['GET','POST'])
 def index():
-    blogs=Blog.query.order_by(Blog.posted.desc()).all()
+    blogs = Blog.query.order_by(Blog.posted.desc()).all()
     if blogs is None:
         abort (404) 
     for blog in blogs:
         format_blog = markdown2.markdown(blog.content,extras=["code-friendly", "fenced-code-blocks"])
-    mail_form = SubscribeForm()
+    mail_form = subscribeForm()
     if mail_form.validate_on_submit():
         email = mail_form.email.data
         name = mail_form.name.data
@@ -41,7 +41,7 @@ def index():
         return redirect(url_for('.index'))
 
     title="Personal Blog"
-    return render_template('index.html', title = title,blogs=blogs, quotes=quotes, mail_form=mail_form)
+    return render_template('index.html', title = title,blogs = blogs, quotes = quotes, mail_form = mail_form)
 
 @main.route('/user/<uname>')
 def profile(uname):
@@ -90,7 +90,7 @@ def new_blog():
     '''
     A function that saves the blog added
     '''
-    blog_form = BlogForm()
+    blog_form = blogForm()
     global new_blog
     if blog_form.validate_on_submit():
         pic =None
@@ -111,11 +111,11 @@ def new_blog():
 
 @main.route('/blog/<int:id>',methods = ['GET','POST'])
 def blog(id):
-    blog=Blog.query.get(id)
+    blog = Blog.query.get(id)
     if blog is None:
         abort(404)
     
-    comment_form = CommentForm()
+    comment_form = commentForm()
     if comment_form.validate_on_submit():
         comment = comment_form.comment.data
 
