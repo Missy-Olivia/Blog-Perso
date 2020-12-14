@@ -1,7 +1,43 @@
 {% extends 'base.html'%}
+{% import 'macro.html' as macro %}
 {% import 'bootstrap/wtf.html' as wtf %}
 
-{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {%block styles%}
+    {{ super() }}
+        <style>
+            
+        </style>
+    {% endblock %}
 
-
-{% endblock %}
+</head>
+    <body>
+    {% block content %}
+    <header>
+        <h1 class="text-center">Welcome Your Personal Blog</h1>
+        <h3 class="text-center">Create and share your opinions with the world</h3>
+    </header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <strong><h3 class="text-center"> Recent Posts</h3></strong><br>
+                {{macro.displayBlogs(blogs)}}
+            </div>
+            <div class="col-md-5">
+                <blockquote>
+                    {{macro.displayQuotes(quotes)}}
+                </blockquote><br><br>
+                <p>Subscribe for more posts and updates</p>
+                {{wtf.quick_form(mail_form)}}
+            </div>
+        </div>
+    </div>
+    <footer class='footer'>Copyright 2020 | Personal Blog</footer> 
+    {% endblock %}
+    </body>
+</html>
+  
