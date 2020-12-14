@@ -32,7 +32,7 @@ def create_app(config_name):
     simple.init_app(app)
 
     #configure Uploadset
-    configure_uploadrs(app,photos)
+    configure_uploads(app,photos)
 
     # Will add the views and forms
 
