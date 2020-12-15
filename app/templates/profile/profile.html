@@ -1,19 +1,27 @@
 {% extends 'base.html'%}
 
 {% block content %}
-<div class="container" style='margin-top:3%;'>
-<div class="row">
-  <div class='col-md-3'></div>
-  <div class="col-md-6 text-center">
-    <h2><strong>{{user.username| capitalize}}</strong></h2>
-    {% if user.profile_pic_path %}
+<style>
+      #btn1{
+        background-color:  rgb(231, 170, 170);
+        color: white;
 
-    <img src="{{url_for('static',filename=user.profile_path)}}" alt="" class="img-thumbnail">
-
-    {%else%}
-    <p>No profile picture</p>
-    {% endif %}
-
+      }
+      #btn2{
+        background-color:  gray;
+        color: white;
+      }
+      #title{
+        color: black;
+        font-weight: bold;
+      }
+      body{
+        background-color: rgba(224, 188, 193, 0.925);
+      }
+</style>
+<div class="container">
+    <div class='col-md-8'>
+      <h2><strong>{{user.username| capitalize}}</strong></h2>
         {% if user == current_user %}
     <form  action="{{url_for('main.update_pic',uname=user.username)}}" method="post" enctype = "multipart/form-data">
 
@@ -28,28 +36,26 @@
     {% endif %}
     <p><strong>{{user.blogs.count()}}</strong> posts</p>
     <button class='btn btn-basic'><a href="{{url_for('main.update_profile',uname=user.username)}}">Edit profile</a></button>
-  </div>
-</div>
-  <div class="row">
-    <div>
-      <h3 class='text-center'><strong>My blogs</strong></h3><br>
-        {% if user.blogs %}
-        <div class='row'>
-          {% for blog in user.blogs %}
-          <div class="panel col-md-6" style='padding:7px;box-shadow: 1px 1px 5px rgb(221, 226, 228);'>
-            <a href="{{url_for('main.blog',id = blog.id)}}"><h5>{{blog.title}}</h5><hr></a>
-            <p >{{blog.content|safe|truncate(30)}}</p>
-            <a href="{{url_for('main.update_post',blog_id = blog.id)}}"><button class='btn btn-success'>Edit</button></a>
-            <a href="{{url_for('main.delete',blog_id = blog.id)}}"><button class='btn btn-danger'>Delete</button></a>
-         </div>
-         {% endfor %}
-        </div>
-        {% else %}
-        <button class="btn btn-outline-info"><a href="{{url_for('main.new_blog')}}"><i class="fas fa-plus"></i> Blog something</a></button></br><br>
-        {% endif %}
-        <button class="btn btn-outline-info"><a href="{{url_for('main.new_blog')}}"><i class="fas fa-plus"></i>  New post</a></button></br><br>
     </div>
-  </div>
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading"><strong>My blogs</strong></div>
+        <div class="panel-body">
+          {% if user.blogs %}
+          {% for blog in user.blogs %}
+            <div>
+              <strong><a id="title" href="{{url_for('main.blog',id = blog.id)}}"><h5>{{blog.title}}</h5><hr></a></strong>
+              <p >{{blog.content|safe|truncate(30)}}</p>
+              <a href="{{url_for('main.update_post',blog_id = blog.id)}}"><button id="btn1" class='btn success'>Edit</button></a>
+              <a href="{{url_for('main.delete',blog_id = blog.id)}}"><button id="btn2" class='btn danger'>Delete</button></a>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+          {% else %}
+          <button class="btn btn-outline-info"><a href="{{url_for('main.new_blog')}}"><i class="fas fa-plus"></i> Blog something</a></button></br><br>
+          {% endif %}
+          <button class="btn btn-outline-info"><a href="{{url_for('main.new_blog')}}"><i class="fas fa-plus"></i>  New post</a></button></br><br>
+    </div>
 </div>
-<footer class='footer' style='position:relative;left:0;bottom:0;background-color:rgb(241, 231, 237);padding:15px;text-align:center;width:100%;color:rgba(29, 28, 28, 0.993);'>Copyright 2020 | BlogApp</footer> 
 {% endblock %}

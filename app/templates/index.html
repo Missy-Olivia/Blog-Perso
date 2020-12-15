@@ -17,10 +17,14 @@
                 height: 90vh;
                 padding: 20%;
             }
-       
-            .container{
-                position: relative;
+            footer{
+                padding: 2px;
+                background-color:gray;
+                color:lightpink;
+                font-family: 'Righteous', 'cursive';
+                border-radius:5px;
             }
+         
         </style>
     {% endblock %}
 
@@ -37,15 +41,18 @@
                 <strong><h3 class="text-center"> Recent Posts</h3></strong><br>
                 {{macro.displayBlogs(blogs)}}
             </div>
-            <div class="col-md-4">
+            <div id="sec" class="col-md-4">
                 <blockquote>
                     {{macro.displayQuotes(quotes)}}
                 </blockquote><br><br>
-                <p>Subscribe for more posts and updates</p>
-                {{wtf.quick_form(mail_form)}}
+                <div class="panel panel-default">
+                    <div class="panel-heading">Subscribe for more posts and updates</div>
+                    <div class="panel-body">{{wtf.quick_form(mail_form)}}</div>
+                </div>
             </div>
         </div>
     </div>
+    <footer class="text-center" >Copyright 2020 | Personal Blog</footer> 
     {% endblock %}
     </body>
 </html>
